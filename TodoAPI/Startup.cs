@@ -13,6 +13,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TodoAPI.Data;
+using TodoAPI.Repositories;
+using TodoAPI.Repositories.Interfaces;
+using AutoMapper;
+using TodoAPI.Mapper;
 
 namespace TodoAPI
 {
@@ -28,7 +32,14 @@ namespace TodoAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // add applicationDbContext services
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
+
+            // add repository services
+            services.AddScoped<ITaskRepository, TaskRepository>();
+
+            //add automapper services
+            services.AddAutoMapper(typeof(ApiMapping));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
