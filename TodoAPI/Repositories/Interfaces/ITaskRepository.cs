@@ -4,7 +4,7 @@ using TodoAPI.Models;
 
 namespace TodoAPI.Repositories.Interfaces
 {
-    interface ITaskRepository
+    public interface ITaskRepository
     {
         ICollection<Task> GetTasks();
         Task GetTask(int id);
