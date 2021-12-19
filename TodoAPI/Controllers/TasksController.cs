@@ -61,7 +61,28 @@ namespace TodoAPI.Controllers
             return StatusCode(201);
         }
 
+        [HttpPatch("{taskId}", Name = "UpdateTask")]
+        public IActionResult UpdateTask(int taskId, TaskDto taskDto)
+        {
+            if (taskId != taskDto.TaskId || taskDto == null)
+                return BadRequest();
 
+            var UpTask = _mapper.Map<Task>(taskDto);
+
+            if (!_taskRepo.UpdateTask(UpTask))
+                return BadRequest("Update failed...!");
+            return NoContent();
+        }
+
+
+        [HttpDelete("{taskId}", Name = "DalteTask")]
+        public IActionResult DeleteTask(int taskId)
+        {
+            var taskInDb = _taskRepo.GetTask(taskId);
+            if (taskInDb == null)
+                return NotFound();
+            return Ok(_taskRepo.DelteTask(taskInDb));
+        }
 
     }
 }
