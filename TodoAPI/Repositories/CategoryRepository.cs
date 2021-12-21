@@ -14,12 +14,12 @@ namespace TodoAPI.Repositories.Interfaces
         {
             _context = context;
         }
-        public ICollection<Category> Categories()
+        public ICollection<Category> GetCategories()
         {
             return _context.Categories.OrderBy(n => n.CategoryName).ToList();
         }
 
-        public Category Category(int id)
+        public Category GetCategory(int id)
         {
             var categoryInDb = _context.Categories.SingleOrDefault(c => c.CategoryId == id);
             return categoryInDb;
