@@ -7,7 +7,7 @@ namespace TodoAPI.Dtos
 {
     public class TaskDto
     {
-        public int TaskId { get; set; }
+        public Guid TaskId { get; set; }
         public string TaskName { get; set; }
         public DateTime CreateAt { get; set; }
         public bool Status { get; set; }

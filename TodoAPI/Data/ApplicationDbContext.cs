@@ -9,5 +9,6 @@ namespace TodoAPI.Data
         {
         }
         public DbSet<Task> Tasks { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }

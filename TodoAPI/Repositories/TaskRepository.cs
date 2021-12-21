@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,7 +29,7 @@ namespace TodoAPI.Repositories
 
         public Models.Task GetTask(int id)
         {
-            var taskInDb = _context.Tasks.SingleOrDefault(t => t.TaskId == id);
+            var taskInDb = _context.Tasks.SingleOrDefault(t => t.TaskId.ToString() == id.ToString());
             return taskInDb;
         }
 
@@ -40,7 +40,7 @@ namespace TodoAPI.Repositories
 
         public bool Save()
         {
-            return _context.SaveChanges() >= 0 ? true: false;
+            return _context.SaveChanges() >= 0 ? true : false;
         }
 
         public bool TaskExist(string name)
@@ -56,3 +56,4 @@ namespace TodoAPI.Repositories
         }
     }
 }
+*/
