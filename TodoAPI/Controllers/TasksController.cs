@@ -62,9 +62,9 @@ namespace TodoAPI.Controllers
         }
 
         [HttpPatch("{taskId}", Name = "UpdateTask")]
-        public IActionResult UpdateTask(string taskId, TaskDto taskDto)
+        public IActionResult UpdateTask(int taskId, TaskDto taskDto)
         {
-            if (taskId.ToString() != taskDto.TaskId.ToString() || taskDto == null)
+            if (taskId != taskDto.TaskId || taskDto == null)
                 return BadRequest();
 
             var UpTask = _mapper.Map<Task>(taskDto);

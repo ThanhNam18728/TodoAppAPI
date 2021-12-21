@@ -21,9 +21,10 @@ namespace TodoAPI.Migrations
 
             modelBuilder.Entity("TodoAPI.Models.Category", b =>
                 {
-                    b.Property<Guid>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
@@ -39,12 +40,13 @@ namespace TodoAPI.Migrations
 
             modelBuilder.Entity("TodoAPI.Models.Task", b =>
                 {
-                    b.Property<Guid>("TaskId")
+                    b.Property<int>("TaskId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime2");
@@ -69,17 +71,12 @@ namespace TodoAPI.Migrations
             modelBuilder.Entity("TodoAPI.Models.Task", b =>
                 {
                     b.HasOne("TodoAPI.Models.Category", "Category")
-                        .WithMany("Tasks")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("TodoAPI.Models.Category", b =>
-                {
-                    b.Navigation("Tasks");
                 });
 #pragma warning restore 612, 618
         }

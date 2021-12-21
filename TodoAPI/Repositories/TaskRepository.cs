@@ -1,8 +1,8 @@
-﻿/*using System;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TodoAPI.Data;
+using TodoAPI.Models;
 using TodoAPI.Repositories.Interfaces;
 
 namespace TodoAPI.Repositories
@@ -15,32 +15,34 @@ namespace TodoAPI.Repositories
         {
             _context = context;
         }
-        public bool CreateTask(Models.Task task)
+        public bool CreateTask(Task task)
         {
             _context.Tasks.Add(task);
             return Save();
         }
 
-        public bool DelteTask(Models.Task task)
+        public bool DelteTask(Task task)
         {
             _context.Tasks.Remove(task);
             return Save();
         }
 
-        public Models.Task GetTask(int id)
+        public Task GetTask(int id)
         {
-            var taskInDb = _context.Tasks.SingleOrDefault(t => t.TaskId.ToString() == id.ToString());
+            var taskInDb = _context.Tasks
+                .Include(c => c.Category)
+                .SingleOrDefault(t => t.TaskId == id);
             return taskInDb;
         }
 
-        public ICollection<Models.Task> GetTasks()
+        public ICollection<Task> GetTasks()
         {
-            return _context.Tasks.OrderBy(o => o.TaskName).ToList();
+            return _context.Tasks.Include(c =>c.Category).ToList();
         }
 
         public bool Save()
         {
-            return _context.SaveChanges() >= 0 ? true : false;
+            return _context.SaveChanges() >= 0;
         }
 
         public bool TaskExist(string name)
@@ -49,11 +51,10 @@ namespace TodoAPI.Repositories
             return taskExist;
         }
 
-        public bool UpdateTask(Models.Task task)
+        public bool UpdateTask(Task task)
         {
             _context.Tasks.Update(task);
             return Save();
         }
     }
 }
-*/

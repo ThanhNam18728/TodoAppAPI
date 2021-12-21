@@ -36,7 +36,7 @@ namespace TodoAPI
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
 
             // add repository services
-            //services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
 
             //add automapper services
             services.AddAutoMapper(typeof(ApiMapping));
