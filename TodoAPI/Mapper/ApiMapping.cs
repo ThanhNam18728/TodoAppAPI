@@ -9,6 +9,7 @@ namespace TodoAPI.Mapper
         public ApiMapping()
         {
             CreateMap<Task, TaskDto>().ReverseMap();
+            CreateMap<Category, CategoryDto>().ReverseMap();
         }
     }
 }

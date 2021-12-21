@@ -37,6 +37,7 @@ namespace TodoAPI
 
             // add repository services
             services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
 
             //add automapper services
             services.AddAutoMapper(typeof(ApiMapping));
